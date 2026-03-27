@@ -46,8 +46,6 @@
             <label for="marcas">Marca:</label>
             <select name="marcas" id="marcas" class="form-control rounded-0" required>
               <option value="">Seleccione</option>
-              <option value="1">Kia</option>
-              <option value="2">Toyota</option>
             </select>
           </div>
 
@@ -86,7 +84,28 @@
   document.addEventListener("DOMContentLoaded", function(){
     
     //Referencias
-    const tabla = document.querySelector("#content-vehiculos")
+    const tabla = document.querySelector("#content-vehiculos") //<tbody>
+    const listaMarcas = document.querySelector("#marcas") //<select>
+
+    async function obtenerMarcas(){
+      try{
+        const response = await fetch(`<?= base_url('marcas/listar') ?>`)
+        const data = await response.json()
+
+        if (response.status != 200) { return; }
+        if (!data) { return; }
+
+        data.forEach(element => {
+          const tagOption = document.createElement("option")
+          tagOption.value = element.id
+          tagOption.innerText = element.marca
+          listaMarcas.appendChild(tagOption)
+        });
+
+      }catch(e){
+        console.error("No se pudo obtener las marcas:", e)
+      }
+    }
 
     async function obtenerVehiculos(){
       try{
@@ -124,7 +143,9 @@
       }
     }
 
+    //Función autoejecución
     obtenerVehiculos()
+    obtenerMarcas()
 
   })
 </script>
