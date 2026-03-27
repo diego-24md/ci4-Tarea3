@@ -17,11 +17,10 @@ $routes->get('/senati', 'Home::index'); //Primer ejemplo de navegación
 //$routes->verbo('/ruta/', 'Controlador::MetodoAccion');
 //Nota: Es posible crear más de una ruta para una vista
 
-$routes->get('/programador', 'Carrera::showIngenieria');
-$routes->get('/coder', 'Carrera::showIngenieria');
-
-$routes->get('/creativo', 'Carrera::showDesign');
-$routes->get('/marketing', 'Carrera::showDesign');
+//$routes->get('/programador', 'Carrera::showIngenieria');
+//$routes->get('/coder', 'Carrera::showIngenieria');
+//$routes->get('/creativo', 'Carrera::showDesign');
+//$routes->get('/marketing', 'Carrera::showDesign');
 
 //Nuevas rutas para navegar desde DASHBOARD
 $routes->get('/clientes','Cliente::index'); //Muestra la tabla con datos
@@ -33,3 +32,5 @@ $routes->post('/clientes/actualizar', 'Cliente::actualizar'); //Después de busc
 
 $routes->get('/proveedores','Proveedor::index');
 $routes->get('/productos','Producto::index');
+
+$routes->get('/vehiculos', 'Vehiculo::index');
