@@ -19,7 +19,7 @@
           <th>Acciones</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="content-vehiculos">
 
       </tbody>
     </table>
@@ -81,5 +81,52 @@
   </div>
 </div>
 <!-- Fin Zona modal -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(){
+    
+    //Referencias
+    const tabla = document.querySelector("#content-vehiculos")
+
+    async function obtenerVehiculos(){
+      try{
+        const response = await fetch(`<?= base_url('vehiculos/listar') ?>`)
+        const data = await response.json()
+        
+        //Si el servidor no respondió correctamente
+        if (response.status != 200) {return;}
+        
+        //Si no encontramos datos...
+        if (!data){ return; }
+
+        tabla.innerHTML = ``
+
+        //¡Todo OK procedemos!
+        data.forEach(element => {
+          tabla.innerHTML += `
+          <tr>
+            <td>${element.id}</td>
+            <td>${element.marca}</td>
+            <td>${element.modelo}</td>
+            <td>${element.anio}</td>
+            <td>${element.color}</td>
+            <td>${element.precio}</td>
+            <td>
+              <a href='#' class='btn btn-sm btn-info'>Editar</a>
+              <a href='#' class='btn btn-sm btn-danger'>Eliminar</a>
+            </td>
+          </tr>
+          `
+        });
+
+      }catch(e){
+        console.error("Error al obtener los datos:", e)
+      }
+    }
+
+    obtenerVehiculos()
+
+  })
+</script>
 
 <?= $footer ?>

@@ -8,7 +8,6 @@ class Vehiculo extends BaseController{
 
   //Retorna la vista para administrar vehiculos
   public function index(){
-
     //Los datos se pueden enviar a la vista utilizando ARREGLO
     $data = [
       'header' => view('Partials/header'),
