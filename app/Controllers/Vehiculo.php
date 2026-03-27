@@ -30,7 +30,10 @@ class Vehiculo extends BaseController{
     $vehiculo = new VehiculoModel();
 
     //Todos los campos requeridos, deberán ser enviados en un JSON
-    $data = $this->response->getJSON();
+    //REQUEST = SOLICITUD
+    //RESPONSE = RESPUESTA
+    $data = $this->request->getJSON();
+    //return $this->response->setJSON($data);
 
     if ($vehiculo->insert($data)){
       return $this->response->setJSON([
@@ -43,6 +46,7 @@ class Vehiculo extends BaseController{
       "success"=> false,
       "message"=> "Error al registrar el vehículo"
     ]);
+    
   }
 
 }

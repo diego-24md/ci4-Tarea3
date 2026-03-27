@@ -40,7 +40,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" id="formulario-vehiculos" autocomplete="off">
+        <form id="formulario-vehiculos" autocomplete="off">
           
           <div class="form-group">
             <label for="marcas">Marca:</label>
@@ -83,9 +83,47 @@
 <script>
   document.addEventListener("DOMContentLoaded", function(){
     
-    //Referencias
+    //Referencias, declaración objetos
     const tabla = document.querySelector("#content-vehiculos") //<tbody>
     const listaMarcas = document.querySelector("#marcas") //<select>
+    const formulario = document.querySelector("#formulario-vehiculos") //<form>
+
+    //Funciones asíncronas
+    async function registrarVehiculo(){
+      try{
+        //Objeto que contenga los datos para registro
+        const vehiculo = {
+          idmarca: listaMarcas.value,
+          modelo: document.querySelector("#modelo").value,
+          anio: document.querySelector("#anio").value,
+          color: document.querySelector("#color").value,
+          precio: document.querySelector("#precio").value
+        }
+
+        //Se envía la solicitud
+        const response = await fetch(`<?= base_url('vehiculos/registrar') ?>`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(vehiculo)
+        })
+
+        const data = await response.json()
+        alert(data.message)
+        
+        //No funcionó
+        if (!data.success) { return; }
+
+        //Todo bien...
+        //Cerrar modal
+        $('#modal-vehiculos').modal('hide')
+
+        //Recargar tabla
+        obtenerVehiculos()
+
+      }catch(e){
+        console.error("No se logró registrar:", e)
+      }
+    }
 
     async function obtenerMarcas(){
       try{
@@ -142,6 +180,15 @@
         console.error("Error al obtener los datos:", e)
       }
     }
+
+    //Eventos
+    formulario.addEventListener("submit", function (event){
+      event.preventDefault() //STOP
+
+      if (!confirm("¿Registramos este vehículo?")) { return; }
+      registrarVehiculo()
+    })
+
 
     //Función autoejecución
     obtenerVehiculos()
