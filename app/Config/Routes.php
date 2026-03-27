@@ -29,6 +29,7 @@ $routes->get('/clientes/registrar', 'Cliente::create'); //Muestra solo el formul
 $routes->post('/clientes/guardar','Cliente::registrarCliente'); //Envía los datos del form a la tabla DB
 $routes->get('/clientes/eliminar/(:num)', 'Cliente::eliminar/$1');
 $routes->get('/clientes/buscar/(:num)', 'Cliente::buscar/$1'); //Antes de actualizar, tenemos que buscar
+$routes->post('/clientes/actualizar', 'Cliente::actualizar'); //Después de buscar, actualizamos los datos
 
 $routes->get('/proveedores','Proveedor::index');
 $routes->get('/productos','Producto::index');

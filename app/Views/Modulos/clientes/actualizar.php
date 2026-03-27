@@ -28,10 +28,21 @@
       </div>
 
       <button type="submit" class="btn btn-primary">Actualizar</button>
-      <button type="reset" class="btn btn-outline-secondary">Cancelar</button>
+      <a href="<?= base_url('/clientes') ?>" class="btn btn-outline-secondary">Cancelar</a> 
     </form>
 
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    const form = document.getElementById('form-clientes');
+    form.addEventListener('submit', function(event){
+      event.preventDefault();
+      if(!confirm('¿Estás seguro de actualizar este cliente?')){ return; }
+      form.submit();
+    });
+  });
+</script>
 
 <?= $footer ?>

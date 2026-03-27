@@ -88,4 +88,23 @@ class Cliente extends BaseController
     return redirect()->to('/clientes');
   }
 
+  public function actualizar(){
+    $cliente = new ClienteModel();
+
+    $idcliente = $this->request->getPost('idcliente');
+    $apellidos = $this->request->getPost('apellidos');
+    $nombres = $this->request->getPost('nombres');
+    $dni = $this->request->getPost('dni');
+    $telefono = $this->request->getPost('telefono');
+
+    $cliente->update($idcliente, [
+      'apellidos' => $apellidos,
+      'nombres'   => $nombres,
+      'dni'       => $dni,
+      'telefono'  => $telefono
+    ]);
+
+    return redirect()->to('/clientes');
+  }
+
 }
