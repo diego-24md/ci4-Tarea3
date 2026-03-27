@@ -34,3 +34,6 @@ $routes->get('/proveedores','Proveedor::index');
 $routes->get('/productos','Producto::index');
 
 $routes->get('/vehiculos', 'Vehiculo::index');
+
+//BD > Modelo > Controlador > Ruta > JS > HTML
+$routes->get('/vehiculos/listar', 'Vehiculo::getVehiculos');
