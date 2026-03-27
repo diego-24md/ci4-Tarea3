@@ -88,6 +88,20 @@
     const listaMarcas = document.querySelector("#marcas") //<select>
     const formulario = document.querySelector("#formulario-vehiculos") //<form>
 
+    //Función estandar
+    function notificar(mensaje = ''){
+      Swal.fire({
+        text: mensaje,
+        icon: 'info',
+        position: 'top-end',
+        timer: 2500,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        toast: true,
+        background: '#ffeaa7'
+      })
+    }
+
     //Funciones asíncronas
     async function registrarVehiculo(){
       try{
@@ -108,7 +122,7 @@
         })
 
         const data = await response.json()
-        alert(data.message)
+        notificar(data.message)
         
         //No funcionó
         if (!data.success) { return; }
@@ -116,6 +130,9 @@
         //Todo bien...
         //Cerrar modal
         $('#modal-vehiculos').modal('hide')
+
+        //Formulario se reinicia
+        formulario.reset()
 
         //Recargar tabla
         obtenerVehiculos()

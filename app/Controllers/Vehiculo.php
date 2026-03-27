@@ -38,7 +38,7 @@ class Vehiculo extends BaseController{
     if ($vehiculo->insert($data)){
       return $this->response->setJSON([
         "success"=> true,
-        "message"=> "Vehículo registrado correctamente"
+        "message"=> "Registrado correctamente"
       ]);
     }
 
