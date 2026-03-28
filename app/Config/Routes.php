@@ -23,15 +23,17 @@ $routes->get('/senati', 'Home::index'); //Primer ejemplo de navegación
 //$routes->get('/marketing', 'Carrera::showDesign');
 
 //Nuevas rutas para navegar desde DASHBOARD
-$routes->get('/clientes','Cliente::index'); //Muestra la tabla con datos
-$routes->get('/clientes/registrar', 'Cliente::create'); //Muestra solo el formulario
-$routes->post('/clientes/guardar','Cliente::registrarCliente'); //Envía los datos del form a la tabla DB
+$routes->get('/clientes','Cliente::index');
+$routes->get('/clientes/registrar', 'Cliente::create');
+$routes->post('/clientes/guardar','Cliente::registrarCliente');
 $routes->get('/clientes/eliminar/(:num)', 'Cliente::eliminar/$1');
-$routes->get('/clientes/buscar/(:num)', 'Cliente::buscar/$1'); //Antes de actualizar, tenemos que buscar
-$routes->post('/clientes/actualizar', 'Cliente::actualizar'); //Después de buscar, actualizamos los datos
+$routes->get('/clientes/buscar/(:num)', 'Cliente::buscar/$1');
+$routes->post('/clientes/actualizar', 'Cliente::actualizar');
 
 // Rutas proveedores
 $routes->get('/proveedores', 'Proveedor::index');
+$routes->get('/proveedores/listar', 'Proveedor::listar');           // <-- NUEVA
+$routes->post('/proveedores/registrar', 'Proveedor::registrar');    // <-- NUEVA
 $routes->get('/proveedores/registrar', 'Proveedor::create');
 $routes->post('/proveedores/guardar', 'Proveedor::registrarProveedor');
 $routes->get('/proveedores/editar/(:num)', 'Proveedor::editar/$1');

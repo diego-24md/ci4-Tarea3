@@ -17,6 +17,33 @@ class Proveedor extends BaseController
         return view('Modulos/proveedores/index', $data);
     }
 
+    public function listar()
+    {
+        $proveedor = new ProveedorModel();
+        return $this->response
+            ->setStatusCode(200)
+            ->setJSON($proveedor->findAll());
+    }
+
+    public function registrar()
+    {
+        $json = $this->request->getJSON(true);
+
+        $proveedor = new ProveedorModel();
+        $resultado = $proveedor->insert([
+            'razon_social'  => $json['razon_social'],
+            'direccion'     => $json['direccion'],
+            'ruc'           => $json['ruc'],
+            'telefono'      => $json['telefono'],
+            'representante' => $json['representante'],
+        ]);
+
+        return $this->response->setJSON([
+            'success' => $resultado ? true : false,
+            'message' => $resultado ? 'Proveedor registrado correctamente' : 'Error al registrar'
+        ]);
+    }
+
     public function create(): string
     {
         $data = [
