@@ -30,8 +30,21 @@ $routes->get('/clientes/eliminar/(:num)', 'Cliente::eliminar/$1');
 $routes->get('/clientes/buscar/(:num)', 'Cliente::buscar/$1'); //Antes de actualizar, tenemos que buscar
 $routes->post('/clientes/actualizar', 'Cliente::actualizar'); //Después de buscar, actualizamos los datos
 
-$routes->get('/proveedores','Proveedor::index');
-$routes->get('/productos','Producto::index');
+// Rutas proveedores
+$routes->get('/proveedores', 'Proveedor::index');
+$routes->get('/proveedores/registrar', 'Proveedor::create');
+$routes->post('/proveedores/guardar', 'Proveedor::registrarProveedor');
+$routes->get('/proveedores/editar/(:num)', 'Proveedor::editar/$1');
+$routes->post('/proveedores/actualizar/(:num)', 'Proveedor::actualizar/$1');
+$routes->get('/proveedores/eliminar/(:num)', 'Proveedor::eliminar/$1');
+
+// Rutas productos
+$routes->get('/productos', 'Producto::index');
+$routes->get('/productos/registrar', 'Producto::create');
+$routes->post('/productos/guardar', 'Producto::registrarProducto');
+$routes->get('/productos/editar/(:num)', 'Producto::editar/$1');
+$routes->post('/productos/actualizar/(:num)', 'Producto::actualizar/$1');
+$routes->get('/productos/eliminar/(:num)', 'Producto::eliminar/$1');
 
 $routes->get('/vehiculos', 'Vehiculo::index');
 
